@@ -47,6 +47,7 @@ public class Main {
 			if (matcher.find()) {
 				System.out.println(matcher.group(0));
 			}
+			System.out.print(request.text);
 		}
     }
 }
