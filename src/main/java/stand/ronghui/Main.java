@@ -36,7 +36,7 @@ public class Main {
 		//签到
 		String[][] params = {{"operation","qiandao"},{"formhash",formHash},{"Cookie","cQWy_2132_saltkey=" + saltKey + ";cQWy_2132_auth=" + cQWy_2132_auth}};
 		headers = new String[][]{{"Cookie",params[2][1]},{"Referer","https://bbs.binmt.cc/forum.php"},{"User-Agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36"}};
-		request = HttpRequest.get("https://bbs.binmt.cc/k_misign-sign.html", params, headers);
+		request = HttpRequest.post("https://bbs.binmt.cc/k_misign-sign.html", params, headers);
 		if (request.text.contains("今日已签")) {
 			System.out.println("MT论坛---今日已签");
 		} else if (request.text.length() == 2) {
@@ -45,9 +45,9 @@ public class Main {
 			System.out.print("MT论坛---签到失败");
 			matcher = Pattern.compile("(?<=CDATA).*?.\\]").matcher(request.text);
 			if (matcher.find()) {
-				System.out.println(matcher.group(0));
+				System.out.println("错误信息" + matcher.group(0));
 			}
-			System.out.print(request.text);
+			System.out.print("完整信息: " + request.text);
 		}
     }
 }
